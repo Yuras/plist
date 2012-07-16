@@ -1,0 +1,18 @@
+
+plist is a library for generation and parsing Mac OS X
+property list format files
+
+Currently it supports only xml1.
+It is based on Haskell XML Toolbox.
+binary1 fromat support is TODO.
+I don't know reference implementation of ISO 8601 in Haskell, so date is not validated and is pepresented as String
+
+* Install
+
+cabal configure
+cabal build
+cabal install
+
+Yuras Shumovich
+shumovichy@gmail.com
+
