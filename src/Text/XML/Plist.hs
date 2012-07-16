@@ -1,14 +1,14 @@
 -----------------------------------------------------------------------------
 --
 -- Module      :  Text.XML.Plist
--- Copyright   :  (c) Yuras Shumovich 2009
+-- Copyright   :  (c) Yuras Shumovich 2009, Michael Tolly 2012
 -- License     :  BSD3
 --
 -- Maintainer  :  shumovichy@gmail.com
 -- Stability   :  experimental
 -- Portability :  portable
 --
--- |Library for generation and parsing Mac OS X plist format
+-- | Library for generation and parsing Mac OS X plist format
 --
 -----------------------------------------------------------------------------
 

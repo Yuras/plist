@@ -7,12 +7,19 @@ It is based on Haskell XML Toolbox.
 binary1 fromat support is TODO.
 I don't know reference implementation of ISO 8601 in Haskell, so date is not validated and is pepresented as String
 
+
 * Install
 
 cabal configure
 cabal build
 cabal install
 
-Yuras Shumovich
-shumovichy@gmail.com
 
+* Author
+Yuras Shumovich <shumovichy@gmail.com>
+
+
+* Contributors
+
+Yuras Shumovich <shumovichy@gmail.com>
+Michael Tolly <tolly@wisc.edu>

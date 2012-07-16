@@ -1,12 +1,12 @@
 name: plist
-version: 0.0.2.1
+version: 0.0.3
 cabal-version: -any
 build-type: Simple
 license: BSD3
 license-file: LICENSE
 copyright: (c) 2009, Yuras Shumovich
 maintainer: shumovichy@gmail.com
-build-depends: base >=3 && < 5, dataenc -any, hxt >= 8.3.0 && < 9.0
+build-depends: base >= 4.3 && < 5, dataenc -any, hxt >= 9 && < 10, hxt-http >= 9 && < 10
 stability: experimental
 homepage:
 package-url:
@@ -20,7 +20,7 @@ description: Simple helper to generate and parse Mac OS X plist format.
              <http://developer.apple.com/mac/library/documentation/Darwin/Reference/ManPages/man5/plist.5.html>
              for details about plist format.
 category: XML
-author: Yuras Shumovich<shumovichy@gmail.com>
+author: Yuras Shumovich <shumovichy@gmail.com>, Michael Tolly <tolly@wisc.edu>
 tested-with:
 data-files: LICENSE README
 data-dir: ""

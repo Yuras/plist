@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------
 --
 -- Module      :  Text.XML.Plist.PlObject
--- Copyright   :  (c) Yuras Shumovich 2009
+-- Copyright   :  (c) Yuras Shumovich 2009, Michael Tolly 2012
 -- License     :  BSD3
 --
 -- Maintainer  :  shumovichy@gmail.com
@@ -26,25 +26,17 @@ fromPlDict
 
 import Data.Word
 
--- |Data type that represents plist object
-data PlObject =
-    -- |string
-    PlString String |
-    -- |bool
-    PlBool Bool |
-    -- |integer
-    PlInteger Int |
-    -- |real
-    PlReal Double |
-    -- |array
-    PlArray [PlObject] |
-    -- |dictionary
-    PlDict [(String, PlObject)] |
-    -- |raw data
-    PlData [Word8] |
-    -- |date (ISO 8601, but currently it is not validated)
-    PlDate String
-    deriving Show
+-- | Data type that represents plist object
+data PlObject
+  = PlString String -- ^ string
+  | PlBool Bool -- ^ bool
+  | PlInteger Int -- ^ integer
+  | PlReal Double -- ^ real
+  | PlArray [PlObject] -- ^ array
+  | PlDict [(String, PlObject)] -- ^ dictionary
+  | PlData [Word8] -- ^ raw data
+  | PlDate String -- ^ date (ISO 8601, but currently it is not validated)
+  deriving (Eq, Ord, Show, Read)
 
 fromPlString :: Monad m => PlObject -> m String
 fromPlString (PlString str) = return str
