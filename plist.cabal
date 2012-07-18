@@ -9,7 +9,7 @@ copyright:               (c) 2009, 2012 Yuras Shumovich
 category:                XML
 build-type:              Simple
 cabal-version:           >= 1.6
-synopsis:                Generate and parse Mac OX property list format
+synopsis:                Generate and parse Mac OS X property list format
 description:             Simple helper to generate and parse Mac OS X plist format.
                          Currently it supports only 'xml1' format.
                          It is based on Haskell XML Toolbox.
@@ -24,7 +24,7 @@ source-repository head
   location:              http://github.com/Yuras/plist.git
 
 library
-  hs-source-dirs: src
+  hs-source-dirs:        src
   build-depends:         base >= 4.3 && < 5,
                          dataenc -any,
                          hxt >= 9 && < 10
@@ -32,4 +32,4 @@ library
                          Text.XML.Plist.PlObject
                          Text.XML.Plist.Write
                          Text.XML.Plist.Read
-  ghc-options: -Wall
+  ghc-options:           -Wall
