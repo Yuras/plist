@@ -4,9 +4,9 @@ cabal-version: -any
 build-type: Simple
 license: BSD3
 license-file: LICENSE
-copyright: (c) 2009, Yuras Shumovich
+copyright: (c) 2009, 2012 Yuras Shumovich
 maintainer: shumovichy@gmail.com
-build-depends: base >= 4.3 && < 5, dataenc -any, hxt >= 9 && < 10, hxt-http >= 9 && < 10
+build-depends: base >= 4.3 && < 5, dataenc -any, hxt >= 9 && < 10
 stability: experimental
 homepage:
 package-url:

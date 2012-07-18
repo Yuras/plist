@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------
 --
 -- Module      :  Text.XML.Plist.Read
--- Copyright   :  (c) Yuras Shumovich 2009, Michael Tolly 2012
+-- Copyright   :  (c) Yuras Shumovich 2009, 2012, Michael Tolly 2012
 -- License     :  BSD3
 --
 -- Maintainer  :  shumovichy@gmail.com
@@ -31,12 +31,11 @@ import Text.XML.HXT.DOM.TypeDefs
 import Control.Arrow.ArrowIf
 import Codec.Binary.Base64
 import Data.Maybe
-import Text.XML.HXT.HTTP
 
 -- | Read 'PlObject' from file.
-readPlistFromFile :: String -> IO PlObject
-readPlistFromFile fileName = do
-  res <- runX $ readDocument [withHTTP []] fileName >>> plistToObject
+readPlistFromFile :: SysConfigList -> String -> IO PlObject
+readPlistFromFile opts fileName = do
+  res <- runX $ readDocument opts fileName >>> plistToObject
   case res of
     [] -> fail $ "can't parse " ++ fileName
     (x:_) -> return x
