@@ -28,11 +28,9 @@ import Control.Monad (void)
 import Control.Arrow.IOStateListArrow
 import Text.XML.HXT.Arrow.WriteDocument
 import Text.XML.HXT.Arrow.XmlArrow
-import Text.XML.HXT.Arrow.XmlOptions
 import Control.Arrow
 import Control.Arrow.ArrowList
 import Text.XML.HXT.DOM.TypeDefs
-import Text.XML.HXT.Arrow.XmlState.TypeDefs
 
 -- | Write 'PlObject' to file
 writePlistToFile :: String -> PlObject -> IO ()
@@ -41,8 +39,7 @@ writePlistToFile fileName object =
 
 writePlist :: String -> IOSLA (XIOState s) PlObject XmlTree
 writePlist fileName = objectToPlist >>>
-  writeDocument [setS theAttrList attrs] fileName
-    where attrs = [(a_indent, "1"), (a_add_default_dtd, "1")]
+  writeDocument [withIndent yes, withAddDefaultDTD yes] fileName
 
 -- | Arrow to convert 'PlObject' to plist with root element and DTD declaration.
 objectToPlist :: ArrowDTD a => a PlObject XmlTree
