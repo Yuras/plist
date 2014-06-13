@@ -41,8 +41,7 @@ writePlistToFile fileName object =
 
 writePlist :: String -> IOSLA (XIOState s) PlObject XmlTree
 writePlist fileName = objectToPlist >>>
-  writeDocument [setS theAttrList attrs] fileName
-    where attrs = [(a_indent, "1"), (a_add_default_dtd, "1")]
+  writeDocument [withIndent yes, withAddDefaultDTD yes] fileName
 
 -- | Arrow to convert 'PlObject' to plist with root element and DTD declaration.
 objectToPlist :: ArrowDTD a => a PlObject XmlTree
