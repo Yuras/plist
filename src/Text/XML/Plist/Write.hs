@@ -28,11 +28,9 @@ import Control.Monad (void)
 import Control.Arrow.IOStateListArrow
 import Text.XML.HXT.Arrow.WriteDocument
 import Text.XML.HXT.Arrow.XmlArrow
-import Text.XML.HXT.Arrow.XmlOptions
 import Control.Arrow
 import Control.Arrow.ArrowList
 import Text.XML.HXT.DOM.TypeDefs
-import Text.XML.HXT.Arrow.XmlState.TypeDefs
 
 -- | Write 'PlObject' to file
 writePlistToFile :: String -> PlObject -> IO ()
