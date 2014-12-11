@@ -1,10 +1,11 @@
 name:                    plist
-version:                 0.0.4
+version:                 0.0.5
 license:                 BSD3
 license-file:            LICENSE
 author:                  Yuras Shumovich <shumovichy@gmail.com>,
                          Michael Tolly <tolly@wisc.edu>
                          Philip Lundrigan <philiplundrigan@gmail.com>
+                         Moritz Angermann <moritz@lichtzwerge.de>
 maintainer:              Yuras Shumovich <shumovichy@gmail.com>
 copyright:               (c) 2009, 2012 Yuras Shumovich
 category:                XML

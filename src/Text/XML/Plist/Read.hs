@@ -15,6 +15,7 @@
 module Text.XML.Plist.Read (
 
 readPlistFromFile,
+readPlistFromString,
 plistToObject,
 xmlToObject
 
@@ -38,6 +39,14 @@ readPlistFromFile opts fileName = do
   res <- runX $ readDocument opts fileName >>> plistToObject
   case res of
     [] -> fail $ "can't parse " ++ fileName
+    (x:_) -> return x
+
+-- | Read 'PlObject' from string.
+readPlistFromString :: SysConfigList -> String -> IO PlObject
+readPlistFromString opts string = do
+  res <- runX $ readString opts string >>> plistToObject
+  case res of
+    [] -> fail $ "can't parse string " ++ string
     (x:_) -> return x
 
 -- | Arrow that converts XML tree to 'PlObject'.

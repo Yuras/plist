@@ -15,6 +15,7 @@
 module Text.XML.Plist.Write (
 
 writePlistToFile,
+writePlistToString,
 objectToPlist,
 objectToXml
 
@@ -23,7 +24,7 @@ objectToXml
 import Text.XML.Plist.PlObject
 import Text.XML.HXT.Arrow.XmlState
 import Codec.Binary.Base64
-import Control.Monad (void)
+import Control.Monad (void, liftM)
 
 import Control.Arrow.IOStateListArrow
 import Text.XML.HXT.Arrow.WriteDocument
@@ -40,6 +41,14 @@ writePlistToFile fileName object =
 writePlist :: String -> IOSLA (XIOState s) PlObject XmlTree
 writePlist fileName = objectToPlist >>>
   writeDocument [withIndent yes, withAddDefaultDTD yes] fileName
+
+-- | Write 'PlObject' to String
+writePlistToString :: PlObject -> IO String
+writePlistToString object = liftM concat $ runX (constA object >>> writePlist')
+
+writePlist' :: IOSLA (XIOState s) PlObject String
+writePlist' = objectToPlist >>>
+  writeDocumentToString [withIndent yes, withAddDefaultDTD yes]
 
 -- | Arrow to convert 'PlObject' to plist with root element and DTD declaration.
 objectToPlist :: ArrowDTD a => a PlObject XmlTree
