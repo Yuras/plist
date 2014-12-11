@@ -16,7 +16,9 @@ module Text.XML.Plist (
 
 PlObject(..),
 writePlistToFile,
+writePlistToString,
 readPlistFromFile,
+readPlistFromString,
 objectToPlist,
 plistToObject,
 objectToXml,
