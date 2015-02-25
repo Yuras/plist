@@ -30,7 +30,9 @@ import Control.Arrow.ArrowList
 import Control.Arrow.ArrowTree
 import Text.XML.HXT.DOM.TypeDefs
 import Control.Arrow.ArrowIf
-import Codec.Binary.Base64
+import Data.ByteString.Char8 (pack)
+import Data.ByteString (unpack)
+import Data.ByteString.Base64
 import Data.Maybe
 
 -- | Read 'PlObject' from file.
@@ -67,12 +69,14 @@ xmlToObject = choiceA
   , hasName "dict" :-> (readDict >>> arr PlDict)
   , hasName "data" :-> (
     innerText >>>
-    arr (decode . unchop . lines) >>>
+    arr (decode' . foldr (++) "" . lines) >>>
     isA isJust >>>
     arr fromJust >>>
     arr PlData
     )
   , hasName "date" :-> (innerText >>> arr PlDate) ]
+  where
+    decode' = either (const Nothing) Just . fmap unpack . decode . pack
 
 readDict :: ArrowXml a => a XmlTree [(String, PlObject)]
 readDict = listA $ readDict' $< listA (getChildren >>> isElem)
