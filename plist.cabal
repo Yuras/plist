@@ -1,5 +1,5 @@
 name:                    plist
-version:                 0.0.5
+version:                 0.0.6
 license:                 BSD3
 license-file:            LICENSE
 author:                  Yuras Shumovich <shumovichy@gmail.com>,
@@ -28,7 +28,8 @@ source-repository head
 library
   hs-source-dirs:        src
   build-depends:         base >= 4.3 && < 5,
-                         dataenc -any,
+                         base64-bytestring >= 1.0,
+                         bytestring >= 0.10,
                          hxt >= 9 && < 10
   exposed-modules:       Text.XML.Plist
                          Text.XML.Plist.PlObject

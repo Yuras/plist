@@ -11,7 +11,7 @@
 -- | Generating property list format
 --
 -----------------------------------------------------------------------------
-
+{-# LANGUAGE OverloadedStrings #-}
 module Text.XML.Plist.Write (
 
 writePlistToFile,
@@ -23,15 +23,16 @@ objectToXml
 
 import Text.XML.Plist.PlObject
 import Text.XML.HXT.Arrow.XmlState
-import Codec.Binary.Base64
 import Control.Monad (void, liftM)
-
 import Control.Arrow.IOStateListArrow
 import Text.XML.HXT.Arrow.WriteDocument
 import Text.XML.HXT.Arrow.XmlArrow
 import Control.Arrow
 import Control.Arrow.ArrowList
 import Text.XML.HXT.DOM.TypeDefs
+import Data.ByteString.Base64 (encode, joinWith)
+import Data.ByteString (pack)
+import Data.ByteString.Char8 (unpack)
 
 -- | Write 'PlObject' to file
 writePlistToFile :: String -> PlObject -> IO ()
@@ -70,5 +71,5 @@ objectToXml (PlDict objects) = selem "dict" elems where
   elems = concatMap toXml objects
   toXml (key, val) = [selem "key" [txt key], objectToXml val]
 objectToXml (PlData dat) = selem "data" [txt $ enc dat] where
-  enc = (++ "\n") . foldr ((++) . ("\n" ++)) "" . chop 20 . encode
+  enc = unpack . joinWith "\n" 20 . encode . pack
 objectToXml (PlDate date) = selem "date" [txt date]
