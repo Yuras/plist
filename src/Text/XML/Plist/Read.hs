@@ -69,14 +69,14 @@ xmlToObject = choiceA
   , hasName "dict" :-> (readDict >>> arr PlDict)
   , hasName "data" :-> (
     innerText >>>
-    arr (decode' . foldr (++) "" . lines) >>>
+    arr (decode' . concat . lines) >>>
     isA isJust >>>
     arr fromJust >>>
     arr PlData
     )
   , hasName "date" :-> (innerText >>> arr PlDate) ]
   where
-    decode' = either (const Nothing) Just . fmap unpack . decode . pack
+    decode' = either (const Nothing) (Just . unpack) . decode . pack
 
 readDict :: ArrowXml a => a XmlTree [(String, PlObject)]
 readDict = listA $ readDict' $< listA (getChildren >>> isElem)
