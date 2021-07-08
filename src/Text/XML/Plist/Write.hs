@@ -23,14 +23,14 @@ objectToXml
 
 import Text.XML.Plist.PlObject
 import Text.XML.HXT.Arrow.XmlState
-import Control.Monad (void, liftM)
+import Control.Monad (void)
 import Control.Arrow.IOStateListArrow
 import Text.XML.HXT.Arrow.WriteDocument
 import Text.XML.HXT.Arrow.XmlArrow
 import Control.Arrow
 import Control.Arrow.ArrowList
 import Text.XML.HXT.DOM.TypeDefs
-import Data.ByteString.Base64 (encode, joinWith)
+import Data.ByteString.Base64 (encode)
 import Data.ByteString (pack)
 import Data.ByteString.Char8 (unpack)
 
@@ -45,7 +45,7 @@ writePlist fileName = objectToPlist >>>
 
 -- | Write 'PlObject' to String
 writePlistToString :: PlObject -> IO String
-writePlistToString object = liftM concat $ runX (constA object >>> writePlist')
+writePlistToString object = concat <$> runX (constA object >>> writePlist')
 
 writePlist' :: IOSLA (XIOState s) PlObject String
 writePlist' = objectToPlist >>>
@@ -71,5 +71,5 @@ objectToXml (PlDict objects) = selem "dict" elems where
   elems = concatMap toXml objects
   toXml (key, val) = [selem "key" [txt key], objectToXml val]
 objectToXml (PlData dat) = selem "data" [txt $ enc dat] where
-  enc = unpack . joinWith "\n" 20 . encode . pack
+  enc = unpack . encode . pack
 objectToXml (PlDate date) = selem "date" [txt date]

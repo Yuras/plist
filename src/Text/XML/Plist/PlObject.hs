@@ -38,27 +38,26 @@ data PlObject
   | PlDate String -- ^ date (ISO 8601, but currently it is not validated)
   deriving (Eq, Ord, Show, Read)
 
-fromPlString :: Monad m => PlObject -> m String
+fromPlString :: MonadFail m => PlObject -> m String
 fromPlString (PlString str) = return str
 fromPlString o = fail $ "not a string: " ++ show o
 
-fromPlBool :: Monad m => PlObject -> m Bool
+fromPlBool :: MonadFail m => PlObject -> m Bool
 fromPlBool (PlBool bool) = return bool
 fromPlBool o = fail $ "not a bool: " ++ show o
 
-fromPlInteger :: Monad m => PlObject -> m Int
+fromPlInteger :: MonadFail m => PlObject -> m Int
 fromPlInteger (PlInteger i) = return i
 fromPlInteger o = fail $ "not an integer: " ++ show o
 
-fromPlReal :: Monad m => PlObject -> m Double
+fromPlReal :: MonadFail m => PlObject -> m Double
 fromPlReal (PlReal r) = return r
 fromPlReal o = fail $ "not a real: " ++ show o
 
-fromPlArray :: Monad m => PlObject -> m [PlObject]
+fromPlArray :: MonadFail m => PlObject -> m [PlObject]
 fromPlArray (PlArray arr) = return arr
 fromPlArray o = fail $ "not an array: " ++ show o
 
-fromPlDict :: Monad m => PlObject -> m [(String, PlObject)]
+fromPlDict :: MonadFail m => PlObject -> m [(String, PlObject)]
 fromPlDict (PlDict d) = return d
 fromPlDict o = fail $ "not a dictionary: " ++ show o
-
